@@ -1,10 +1,13 @@
 package com.example.intro_firebase.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,6 +28,7 @@ import com.example.intro_firebase.viewmodel.HomeViewModel
 import com.example.intro_firebase.viewmodel.PenyediaViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.intro_firebase.R
+import com.example.intro_firebase.modeldata.Siswa
 import com.example.intro_firebase.view.route.DestinasiHome
 import com.example.intro_firebase.viewmodel.StatusUiSiswa
 
@@ -95,4 +99,22 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
         modifier = modifier.size(200.dp),
         painter = painterResource(id = R.drawable.loading_img),
         contentDescription = stringResource(id = R.string.loading))
+}
+
+@Composable
+fun DaftarSiswa(
+    itemSiswa : List<Siswa>,
+    onSiswaClick: (Siswa) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(modifier = Modifier) {
+        items(items = itemSiswa, key = {it.id}) {
+            person ->
+            ItemSiswa(
+                siswa = person,
+                modifier= Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+                    .clickable { onSiswaClick(person) }
+            )
+        }
+    }
 }
