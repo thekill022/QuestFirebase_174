@@ -20,7 +20,7 @@ fun SiswaTopAppBar(
     canNavigateback : Boolean,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp : () -> Unit
+    navigateUp : () -> Unit = {}
 ) {
 
     CenterAlignedTopAppBar(
